@@ -1,4 +1,4 @@
-# gantt-task-react
+# gantt-task-react (한국식 날짜 표기 적용)
 
 ## Interactive Gantt Chart for React with TypeScript.
 
