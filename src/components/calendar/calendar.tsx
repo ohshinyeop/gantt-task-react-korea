@@ -225,6 +225,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         .getDate()
         .toString()}`;
 
+        console.log(bottomValue);
       bottomValues.push(
         <text
           key={date.getTime()}
