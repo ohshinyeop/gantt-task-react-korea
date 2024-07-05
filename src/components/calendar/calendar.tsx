@@ -226,7 +226,11 @@ export const Calendar: React.FC<CalendarProps> = ({
     const dates = dateSetup.dates;
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
-      const bottomValue = locale === 'kor' ? `${date.getFullYear()}년 ${getLocaleMonth(date, locale)}` 
+      const bottomValue = locale === 'kor' ? `${getLocaleMonth(date, locale)} ${date.getDate()}일 (${getLocalDayOfWeek(
+          date,
+          locale,
+          "short"
+        )})` 
         : 
        `${getLocalDayOfWeek(date, locale, "short")}, ${date.getDate().toString()}`;
       
