@@ -176,7 +176,12 @@ export const Calendar: React.FC<CalendarProps> = ({
       let topValue = "";
       if (i === 0 || date.getMonth() !== dates[i - 1].getMonth()) {
         // top
-        topValue = `${date.getFullYear()}년 ${getLocaleMonth(date, locale)}`;
+        if(locale.includes('ko')) {
+          topValue = `${date.getFullYear()}년 ${getLocaleMonth(date, locale)}`;
+        }
+        else{
+          topValue = `${getLocaleMonth(date, locale)}, ${date.getFullYear()}`;
+        }
       }
       // bottom
       const bottomValue = `${getWeekNumberISO8601(date)}주`;
@@ -221,9 +226,10 @@ export const Calendar: React.FC<CalendarProps> = ({
     const dates = dateSetup.dates;
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
-      const bottomValue = `${date
-        .getDate()
-        .toString()}일 (${getLocalDayOfWeek(date, locale, "short")})`;
+      const bottomValue = locale.includes('ko') ? `${date.getFullYear()}년 ${getLocaleMonth(date, locale)}` 
+        : 
+       `${getLocalDayOfWeek(date, locale, "short")}, ${date.getDate().toString()}`;
+      
 
       bottomValues.push(
         <text
@@ -286,11 +292,15 @@ export const Calendar: React.FC<CalendarProps> = ({
         </text>
       );
       if (i === 0 || date.getDate() !== dates[i - 1].getDate()) {
-        const topValue = `${getLocaleMonth(date, locale)} ${date.getDate()}일 (${getLocalDayOfWeek(
+        const topValue = locale.includes('ko') ? `${getLocaleMonth(date, locale)} ${date.getDate()}일 (${getLocalDayOfWeek(
           date,
           locale,
           "short"
-        )})`;
+        )})` :  `${getLocalDayOfWeek(
+          date,
+          locale,
+          "short"
+        )}, ${date.getDate()} ${getLocaleMonth(date, locale)}`;
         topValues.push(
           <TopPartOfCalendar
             key={topValue + date.getFullYear()}
@@ -332,11 +342,15 @@ export const Calendar: React.FC<CalendarProps> = ({
       );
       if (i !== 0 && date.getDate() !== dates[i - 1].getDate()) {
         const displayDate = dates[i - 1];
-        const topValue = `${getLocaleMonth(displayDate, locale)} ${displayDate.getDate()}일 (${getLocalDayOfWeek(
+        const topValue = locale.includes('ko') ? `${getLocaleMonth(displayDate, locale)} ${displayDate.getDate()}일 (${getLocalDayOfWeek(
           displayDate,
           locale,
           "long"
-        )})`;
+        )})` : `${getLocalDayOfWeek(
+          date,
+          locale,
+          "long"
+        )}, ${date.getDate()} ${getLocaleMonth(date, locale)}`;
         const topPosition = (date.getHours() - 24) / 2;
         topValues.push(
           <TopPartOfCalendar
