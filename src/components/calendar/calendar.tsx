@@ -32,6 +32,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   fontFamily,
   fontSize,
 }) => {
+  console.log("locale", locale);
   const getCalendarValuesForYear = () => {
     const topValues: ReactChild[] = [];
     const bottomValues: ReactChild[] = [];
@@ -176,7 +177,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       let topValue = "";
       if (i === 0 || date.getMonth() !== dates[i - 1].getMonth()) {
         // top
-        if(locale.includes('ko')) {
+        if(locale === 'kor') {
           topValue = `${date.getFullYear()}년 ${getLocaleMonth(date, locale)}`;
         }
         else{
@@ -226,7 +227,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     const dates = dateSetup.dates;
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
-      const bottomValue = locale.includes('ko') ? `${date.getFullYear()}년 ${getLocaleMonth(date, locale)}` 
+      const bottomValue = locale === 'kor' ? `${date.getFullYear()}년 ${getLocaleMonth(date, locale)}` 
         : 
        `${getLocalDayOfWeek(date, locale, "short")}, ${date.getDate().toString()}`;
       
@@ -292,7 +293,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         </text>
       );
       if (i === 0 || date.getDate() !== dates[i - 1].getDate()) {
-        const topValue = locale.includes('ko') ? `${getLocaleMonth(date, locale)} ${date.getDate()}일 (${getLocalDayOfWeek(
+        const topValue = locale === 'kor' ? `${getLocaleMonth(date, locale)} ${date.getDate()}일 (${getLocalDayOfWeek(
           date,
           locale,
           "short"
@@ -342,7 +343,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       );
       if (i !== 0 && date.getDate() !== dates[i - 1].getDate()) {
         const displayDate = dates[i - 1];
-        const topValue = locale.includes('ko') ? `${getLocaleMonth(displayDate, locale)} ${displayDate.getDate()}일 (${getLocalDayOfWeek(
+        const topValue = locale === 'kor' ? `${getLocaleMonth(displayDate, locale)} ${displayDate.getDate()}일 (${getLocalDayOfWeek(
           displayDate,
           locale,
           "long"
