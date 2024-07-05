@@ -32,7 +32,6 @@ export const Calendar: React.FC<CalendarProps> = ({
   fontFamily,
   fontSize,
 }) => {
-  console.log("locale", locale);
   const getCalendarValuesForYear = () => {
     const topValues: ReactChild[] = [];
     const bottomValues: ReactChild[] = [];
@@ -185,7 +184,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         }
       }
       // bottom
-      const bottomValue = `${getWeekNumberISO8601(date)}주`;
+      const bottomValue = locale === 'kor' ? `${getWeekNumberISO8601(date)}주` : `W${getWeekNumberISO8601(date)}`;
 
       bottomValues.push(
         <text
