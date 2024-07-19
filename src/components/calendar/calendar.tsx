@@ -6,7 +6,7 @@ import {
   getDaysInMonth,
   getLocalDayOfWeek,
   getLocaleMonth,
-  getWeekNumberISO8601,
+  getWeekOfMonth,
 } from "../../helpers/date-helper";
 import { DateSetup } from "../../types/date-setup";
 import styles from "./calendar.module.css";
@@ -205,8 +205,8 @@ export const Calendar: React.FC<CalendarProps> = ({
       // bottom
       const bottomValue =
         locale === "kor"
-          ? `${getWeekNumberISO8601(date)}주`
-          : `W${getWeekNumberISO8601(date)}`;
+          ? `${getLocaleMonth(date, locale)} ${getWeekOfMonth(date)}주`
+          : `W${getWeekOfMonth(date)}`;
 
       bottomValues.push(
         <g key={date.getTime()}>
